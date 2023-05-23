@@ -2,20 +2,25 @@ import {
   View,
   Text,
   TextInput,
-  Button,
   StyleSheet,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
 
 const AddTodo = () => {
-    
   const [title, settitle] = useState('');
 
   let dispatch = useDispatch();
 
   const addToDo = () => {
+    if (title === '') {
+      Alert.alert('Empty ToDo', 'Please Enter ToDo then press Add again', [
+        {text: 'OK'},
+      ]);
+      return;
+    }
     let newTodoItem = {
       id: Math.floor(Math.random() * 10000),
       title: title,
@@ -23,6 +28,7 @@ const AddTodo = () => {
     };
 
     dispatch({type: 'ADD_TODO', payload: newTodoItem});
+    settitle('');
   };
 
   return (
@@ -32,6 +38,7 @@ const AddTodo = () => {
         onChangeText={settitle}
         placeholderTextColor={'purple'}
         placeholder="Enter To Do"
+        value={title}
       />
       <TouchableOpacity
         onPress={addToDo}
