@@ -2,7 +2,6 @@ import { View, Text, TouchableOpacity, ScrollView, FlatList } from 'react-native
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../App';
-import { Dimensions } from 'react-native';
 import { Checkbox } from 'react-native-paper';
 
 const ToDoList = () => {
