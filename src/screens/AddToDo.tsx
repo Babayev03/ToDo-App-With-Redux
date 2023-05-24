@@ -8,9 +8,11 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
+import { Checkbox } from 'react-native-paper';
 
 const AddTodo = () => {
   const [title, settitle] = useState('');
+  const [checked, setChecked] = React.useState(false);
 
   let dispatch = useDispatch();
 
