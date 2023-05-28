@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -7,27 +7,28 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import { useDispatch } from 'react-redux';
+import {useDispatch} from 'react-redux';
+import {addTodoThunk} from '../redux/todo/TodoSlice';
+import {AppDispatch} from '../../App';
 
 const AddTodo = () => {
   const [title, setTitle] = useState('');
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const addToDo = () => {
     if (title === '') {
       Alert.alert('Empty ToDo', 'Please Enter ToDo then press Add again', [
-        { text: 'OK' },
+        {text: 'OK'},
       ]);
       return;
     }
 
     let newTodoItem = {
-      id: Math.floor(Math.random() * 10000),
       title: title,
       completed: false,
     };
 
-    dispatch({ type: 'ADD_TODO', payload: newTodoItem });
+    dispatch(addTodoThunk(newTodoItem));
     setTitle('');
   };
 
@@ -40,10 +41,7 @@ const AddTodo = () => {
         placeholder="Enter ToDo"
         value={title}
       />
-      <TouchableOpacity
-        onPress={addToDo}
-        style={styles.addButton}
-      >
+      <TouchableOpacity onPress={addToDo} style={styles.addButton}>
         <Text style={styles.buttonText}>Add ToDo</Text>
       </TouchableOpacity>
     </View>
@@ -54,7 +52,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
     padding: 16,
-    borderRadius: 8,
+    borderRadius: 8,  
   },
   input: {
     height: 40,
